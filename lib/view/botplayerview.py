@@ -36,9 +36,6 @@ class BotPlayerView(Screen):
 	enemy.start_first()
 	game.start()
 
-	def __await__(self, name):
-		self.btnGame_press(1)
-
 	def set_all_button_disable(self, isDisable):
 
 		for index in range(1, len(self.dictIndexToButtonName) + 1):
@@ -73,7 +70,6 @@ class BotPlayerView(Screen):
 	def btnRestart_press(self, btn):
 		self.restart_game()
 		self.reset_button()
-		self.manager.current = "botplayer-gameplay"
 		self.state_space = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
 
 
@@ -144,9 +140,9 @@ class BotPlayerView(Screen):
 
 			boxLayout = BoxLayout(orientation = "vertical")
 
-			dlgGameOver = Popup(title = "GameOver",
+			dlgGameOver = Popup(title = "Game Over",
 					size_hint = (None, None),
-					size = (400, 400),
+					size = (500, 400),
 					auto_dismiss = False)
 
 
@@ -155,7 +151,7 @@ class BotPlayerView(Screen):
 
 			btnRestart = Button(text = "Restart")
 			btnRestart.bind(on_press = self.btnRestart_press)
-			btnRestart.bind(on_release = dlgGameOver.dismiss)
+			btnRestart.bind(on_release=dlgGameOver.dismiss)
 
 
 			btnMainMenu = Button(text = "MainMenu")
@@ -164,11 +160,10 @@ class BotPlayerView(Screen):
 
 
 			if (self.player.isWin):
-				lblWinner.text += "You won! But I'm learning"
+				lblWinner.text += "You won! But I'm learning your moves"
 
 			elif (self.enemy.isWin):
 				lblWinner.text += "Yay!! I won"
-
 			else:
 				lblWinner.text = "Hmm! You are tough to crack"
 

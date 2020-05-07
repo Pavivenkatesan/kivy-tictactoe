@@ -1,21 +1,42 @@
 #:kivy 1.9.1
 
+<BackgroundColor@Widget>
+    background_color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<BackgroundLabel@Label+BackgroundColor>
+    background_color: 0, 0, 0, 0
+
 <MainMenuButton@Button>
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, 0
+        Line:
+            width: 2
+            rectangle: self.x, self.y, self.width, self.height
     font_size: 50
     width: 100
     font_size: 50
-
-
-<MultiplayerOptionButton@Button>
-    font_size: 30
-
+    background_normal: ''
+    background_color: 1, .525, .2, 1
 
 <GameButton@Button>:
-    color: 0, 0, 0, 0.5
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Line:
+            width: 3
+            rectangle: self.x, self.y, self.width, self.height
     siz_hint_x: None
     width: 200
     font_size: 100
-
+    background_normal: 'OK'
+    background_color: 1, .525, .2, 1
 
 <GameLayout@GridLayout>:
     cols: 3
@@ -31,27 +52,37 @@
 <MainMenuView>:
     BoxLayout:
         orientation: "vertical"
-
-        Label:
+        BackgroundLabel:
             text: "Tic Tac Toe"
-            font_size: 150
+            font_size: 100
+            font_name: 'fonts/AlfaSlabOne-Regular.ttf'
+            width: 100
+            color: (1, .525, .2, 1)
+            markup: True
+            background_color: 1, 1, 1, 1
         MainMenuButton:
             id: btnHumanPlayer
             text: "Let me play first"
+            font_name: 'fonts/AlfaSlabOne-Regular.ttf'
             on_release: root.btnHumanPlayer_release()
 
         MainMenuButton:
             id: btnAIPlayer
             text: "Let AI play first"
+            font_name: 'fonts/AlfaSlabOne-Regular.ttf'
             on_release: root.btnBotPlayer_release()
 
         MainMenuButton:
             id: btnExit
             text: "Exit"
+            font_name: 'fonts/AlfaSlabOne-Regular.ttf'
             on_release: root.btnExit_release()
 
 <SinglePlayerView>:
     GameLayout:
+        height: self.minimum_height
+        size_hint: 0.5, 0.5
+        pos_hint: {'x': .2, 'y': .2}
         GameButton:
             id: btn1
             on_press: root.btnGame_press(btn1)
@@ -100,6 +131,9 @@
 <BotPlayerView>:
     on_enter: root.btnGame_press(btn1)
     GameLayout:
+        height: self.minimum_height
+        size_hint: 0.5, 0.5
+        pos_hint: {'x': .2, 'y': .2}
         GameButton:
             id: btn1
             on_press: root.btnGame_press(btn1)

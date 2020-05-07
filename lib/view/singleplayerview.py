@@ -146,9 +146,9 @@ class SinglePlayerView(Screen):
 
 			boxLayout = BoxLayout(orientation = "vertical")
 
-			dlgGameOver = Popup(title = "GameOver",
+			dlgGameOver = Popup(title = "Game Over",
 					size_hint = (None, None),
-					size = (400, 400),
+					size = (500, 400),
 					auto_dismiss = False)
 
 
@@ -166,12 +166,12 @@ class SinglePlayerView(Screen):
 
 
 			if (self.player.isWin):
-				lblWinner.text += "You won! But I'm learning"
+				lblWinner.text += "You won! But I'm learning your moves"
 
 			elif (self.enemy.isWin):
 				lblWinner.text += "Yay!! I won"
 			else:
-				lblWinner.text = "Hmm! You are tough to crack"
+				lblWinner.text = "Its a draw! Hmmm...."
 
 
 			boxLayout.add_widget(lblWinner)
