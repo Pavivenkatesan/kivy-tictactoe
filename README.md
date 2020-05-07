@@ -1,1 +1,7 @@
-This is my first python project
+#Tic tac toe using Reinforcement Learning
+
+
+
+
+
+@copyright MIT License
